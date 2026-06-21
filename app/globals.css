@@ -1,0 +1,222 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 355 100% 98%;
+    --foreground: 0 0% 17%;
+    --card: 355 100% 99%;
+    --card-foreground: 0 0% 17%;
+    --popover: 355 100% 99%;
+    --popover-foreground: 0 0% 17%;
+    --primary: 272 39% 39%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 35 100% 55%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 272 30% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 45 100% 72%;
+    --accent-foreground: 0 0% 17%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 272 20% 90%;
+    --input: 272 20% 90%;
+    --ring: 272 39% 39%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 272 50% 8%;
+    --foreground: 0 0% 98%;
+    --card: 272 50% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 272 50% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 272 39% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 35 100% 55%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 272 30% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 45 100% 72%;
+    --accent-foreground: 0 0% 17%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 272 30% 20%;
+    --input: 272 30% 20%;
+    --ring: 272 39% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-charcoal font-poppins antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    @apply bg-royal-200 text-royal-900;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+
+  .glass-dark {
+    @apply bg-charcoal/80 backdrop-blur-md border border-white/10;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-royal via-royal-600 to-warm bg-clip-text text-transparent;
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .text-shadow-sm {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 ease-premium hover:-translate-y-2 hover:shadow-2xl;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-300 ease-premium hover:scale-105;
+  }
+
+  .hover-glow {
+    @apply transition-shadow duration-300 ease-premium hover:shadow-[0_0_30px_rgba(94,59,138,0.3)];
+  }
+
+  .premium-card {
+    @apply bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-500 ease-premium;
+    box-shadow: 0 4px 20px rgba(94, 59, 138, 0.1);
+  }
+
+  .premium-card:hover {
+    box-shadow: 0 12px 40px rgba(94, 59, 138, 0.2);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-royal text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 ease-premium hover:bg-royal-600 hover:shadow-xl hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 bg-warm text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 ease-premium hover:bg-warm-600 hover:shadow-xl hover:-translate-y-0.5;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 border-2 border-royal text-royal font-semibold px-8 py-4 rounded-full transition-all duration-300 ease-premium hover:bg-royal hover:text-white;
+  }
+
+  .section-padding {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+
+  .section-title {
+    @apply font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-lg md:text-xl text-charcoal/70 max-w-2xl mx-auto;
+  }
+
+  .badge-premium {
+    @apply inline-flex items-center gap-1 text-sm font-semibold px-3 py-1 rounded-full bg-royal-100 text-royal-700;
+  }
+
+  .badge-accent {
+    @apply inline-flex items-center gap-1 text-sm font-semibold px-3 py-1 rounded-full bg-accent text-charcoal;
+  }
+
+  .price-tag {
+    @apply inline-flex items-center font-bold text-royal text-lg;
+  }
+
+  .parallax-bg {
+    @apply fixed inset-0 -z-10 bg-fixed bg-cover bg-center;
+  }
+
+  .overlay-dark {
+    @apply absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/40 to-charcoal/70;
+  }
+
+  .overlay-premium {
+    @apply absolute inset-0 bg-gradient-to-br from-royal-900/80 via-charcoal/60 to-royal-800/80;
+  }
+
+  .decorative-dots {
+    background-image: radial-gradient(circle, #5E3B8A 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+}
+
+@layer utilities {
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+  .animation-delay-700 {
+    animation-delay: 700ms;
+  }
+  .animation-delay-1000 {
+    animation-delay: 1000ms;
+  }
+
+  .mask-gradient-bottom {
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5E3B8A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4A2F6E;
+}
+
+/* Smooth image loading */
+img {
+  transition: opacity 0.3s ease;
+}
