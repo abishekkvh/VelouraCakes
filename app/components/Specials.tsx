@@ -85,7 +85,7 @@ export default function Specials() {
         {/* Content Items */}
         <motion.div
           layout
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="flex overflow-x-auto sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
         >
           <AnimatePresence mode="popLayout">
             {(activeTab === 'brownies' ? bowlBrownies : cheesecakes).map((item, index) => (
@@ -96,42 +96,54 @@ export default function Specials() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
-                className="premium-card flex flex-col justify-between group"
+                className="premium-card flex flex-col justify-between group w-[140px] sm:w-auto shrink-0 snap-start overflow-hidden"
               >
-                <div>
-                  <div className="relative h-48 overflow-hidden">
+              <div className="flex flex-col h-full">
+                <div className="relative h-32 sm:h-48">
+                  <div className="w-full h-full overflow-hidden">
                     <img
                       src={item.image}
                       alt={item.name}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                     />
-                    <div className="absolute top-4 right-4 bg-warm text-white text-[10px] font-bold px-2 py-1 rounded">
-                      Promo Price
-                    </div>
                   </div>
-                  <div className="p-6">
-                    <h4 className="font-playfair text-xl font-bold text-charcoal mb-2 group-hover:text-royal transition-colors">
-                      {item.name}
-                    </h4>
-                    <p className="text-charcoal/60 text-sm leading-relaxed">
-                      {activeTab === 'brownies' 
-                        ? 'Indulgent fudge brownie bowl served with premium toppings.' 
-                        : 'Creamy, rich cheesecake prepared using real fruit pulp and high-quality cheese.'}
-                    </p>
+                  <div className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-warm text-white text-[9px] sm:text-[10px] font-bold px-2 py-0.5 sm:px-2 sm:py-1 rounded">
+                    Promo
                   </div>
-                </div>
-                <div className="p-6 pt-0 border-t border-gray-100/50 mt-auto">
-                  <div className="flex justify-between items-center pt-4">
-                    <span className="text-2xl font-bold text-royal">₹{item.price}</span>
+                  {/* Floating Add To Cart Button - Mobile Only */}
+                  <div className="absolute -bottom-3 right-1 sm:hidden z-10">
                     <AddToCartButton
                       name={item.name}
                       price={item.price}
                       variant="Special"
                       image={item.image}
+                      compact={true}
                     />
                   </div>
                 </div>
+                <div className="p-3 sm:p-6 flex flex-col grow">
+                  <h4 className="font-playfair text-sm sm:text-xl font-bold text-charcoal sm:mb-2 group-hover:text-royal transition-colors line-clamp-2">
+                    {item.name}
+                  </h4>
+                  <p className="hidden sm:block text-charcoal/60 text-sm leading-relaxed line-clamp-2">
+                    {activeTab === 'brownies' 
+                      ? 'Indulgent fudge brownie bowl served with premium toppings.' 
+                      : 'Creamy, rich cheesecake prepared using real fruit pulp and high-quality cheese.'}
+                  </p>
+                  <div className="mt-1 sm:mt-auto pt-1 sm:pt-4 sm:border-t sm:border-gray-100/50 flex justify-between items-center">
+                    <span className="text-sm sm:text-2xl font-bold text-royal">₹{item.price}</span>
+                    <div className="hidden sm:block">
+                      <AddToCartButton
+                        name={item.name}
+                        price={item.price}
+                        variant="Special"
+                        image={item.image}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
               </motion.div>
             ))}
           </AnimatePresence>

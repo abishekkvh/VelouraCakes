@@ -81,7 +81,7 @@ export default function Brownies() {
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex overflow-x-auto sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {weightBrownies.map((b, index) => {
               const currentPrice = b.prices[activeWeight];
               const variantName = activeWeight === 'quarter' ? '1/4 KG' : activeWeight === 'half' ? '1/2 KG' : '1 KG';
@@ -92,35 +92,50 @@ export default function Brownies() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="bg-white/5 border border-white/10 rounded-xl overflow-hidden flex flex-col justify-between group hover:bg-white/10 transition-colors"
+                  className="bg-white/5 border border-white/10 rounded-xl overflow-hidden flex flex-col justify-between group hover:bg-white/10 transition-colors w-[140px] sm:w-auto shrink-0 snap-start"
                 >
-                  <div>
-                    <div className="relative h-44 overflow-hidden">
-                      <img
-                        src={b.image}
-                        alt={b.name}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  <div className="flex flex-col h-full">
+                    <div className="relative h-32 sm:h-44">
+                      <div className="w-full h-full overflow-hidden">
+                        <img
+                          src={b.image}
+                          alt={b.name}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                      </div>
+                      {/* Floating Add To Cart Button - Mobile Only */}
+                      <div className="absolute -bottom-3 right-1 sm:hidden z-10">
+                        <AddToCartButton
+                          name={b.name}
+                          price={currentPrice}
+                          variant={variantName}
+                          image={b.image}
+                          className="bg-amber-500 hover:bg-amber-600 text-charcoal"
+                          compact={true}
+                        />
+                      </div>
                     </div>
-                    <div className="p-5">
-                      <h4 className="font-bold text-white text-lg group-hover:text-amber-400 transition-colors mb-2">{b.name}</h4>
-                      <p className="text-white/50 text-xs leading-relaxed">{b.description}</p>
+                    <div className="p-3 sm:p-5 flex flex-col grow">
+                      <h4 className="font-bold text-white text-sm sm:text-lg group-hover:text-amber-400 transition-colors sm:mb-2 line-clamp-2">{b.name}</h4>
+                      <p className="hidden sm:block text-white/50 text-xs leading-relaxed line-clamp-2">{b.description}</p>
+                      <div className="mt-1 sm:mt-auto pt-1 sm:pt-4 sm:border-t sm:border-white/10 flex items-center justify-between">
+                        <div className="flex flex-col">
+                          <span className="text-sm sm:text-2xl font-extrabold text-amber-400">₹{currentPrice}</span>
+                          <span className="text-white/40 text-[9px] sm:text-[10px]">{variantName}</span>
+                        </div>
+                        <div className="hidden sm:block">
+                          <AddToCartButton
+                            name={b.name}
+                            price={currentPrice}
+                            variant={variantName}
+                            image={b.image}
+                            className="bg-amber-500 hover:bg-amber-600 text-charcoal text-xs px-3 py-1.5"
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-center justify-between px-5 pb-5 pt-4 border-t border-white/10 mt-auto">
-                    <div className="flex flex-col">
-                      <span className="text-2xl font-extrabold text-amber-400">₹{currentPrice}</span>
-                      <span className="text-white/40 text-[10px]">{variantName}</span>
-                    </div>
-                    <AddToCartButton
-                      name={b.name}
-                      price={currentPrice}
-                      variant={variantName}
-                      image={b.image}
-                      className="bg-amber-500 hover:bg-amber-600 text-charcoal text-xs px-3 py-1.5"
-                    />
                   </div>
                 </motion.div>
               );
@@ -151,7 +166,7 @@ export default function Brownies() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="flex overflow-x-auto sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {customBrownies.map((box, index) => {
               const hasWeightPrices = 'prices' in box;
               const price = hasWeightPrices && box.prices ? (box.prices as any)[boxWeight] : (box as any).price;
@@ -166,43 +181,58 @@ export default function Brownies() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className="bg-white/5 border border-white/10 rounded-xl overflow-hidden flex flex-col justify-between group hover:bg-white/10 transition-colors"
+                  className="bg-white/5 border border-white/10 rounded-xl overflow-hidden flex flex-col justify-between group hover:bg-white/10 transition-colors w-[140px] sm:w-auto shrink-0 snap-start"
                 >
-                  <div>
-                    <div className="relative h-44 overflow-hidden">
-                      <img
-                        src={box.image}
-                        alt={box.name}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                      <div className="absolute top-4 left-4">
-                        <span className="text-xs bg-amber-500/20 backdrop-blur-sm text-amber-400 font-semibold px-2 py-1 rounded">
+                  <div className="flex flex-col h-full">
+                    <div className="relative h-32 sm:h-44">
+                      <div className="w-full h-full overflow-hidden">
+                        <img
+                          src={box.image}
+                          alt={box.name}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                      </div>
+                      <div className="absolute top-2 left-2 sm:top-4 sm:left-4">
+                        <span className="text-[9px] sm:text-xs bg-amber-500/20 backdrop-blur-sm text-amber-400 font-semibold px-2 py-0.5 sm:px-2 sm:py-1 rounded">
                           {box.badge}
                         </span>
                       </div>
-                      <div className="absolute top-4 right-4">
+                      <div className="absolute top-2 right-2 sm:top-4 sm:right-4 hidden sm:block">
                         <span className="text-[10px] text-white/70 bg-black/30 backdrop-blur-sm px-2 py-1 rounded">Eggless Opt. Available</span>
                       </div>
+                      {/* Floating Add To Cart Button - Mobile Only */}
+                      <div className="absolute -bottom-3 right-1 sm:hidden z-10">
+                        <AddToCartButton
+                          name={box.name}
+                          price={price}
+                          variant={variantText}
+                          image={box.image}
+                          className="bg-amber-500 hover:bg-amber-600 text-charcoal"
+                          compact={true}
+                        />
+                      </div>
                     </div>
-                    <div className="p-5">
-                      <h4 className="font-bold text-white text-lg mb-2 group-hover:text-amber-400 transition-colors">{box.name}</h4>
-                      <p className="text-white/60 text-sm leading-relaxed mb-4">{box.description}</p>
+                    <div className="p-3 sm:p-5 flex flex-col grow">
+                      <h4 className="font-bold text-white text-sm sm:text-lg sm:mb-2 group-hover:text-amber-400 transition-colors line-clamp-2">{box.name}</h4>
+                      <p className="hidden sm:block text-white/60 text-sm leading-relaxed mb-4 line-clamp-2">{box.description}</p>
+                      <div className="mt-1 sm:mt-auto pt-1 sm:pt-4 sm:border-t sm:border-white/10 flex items-center justify-between">
+                        <div className="flex flex-col">
+                          <span className="text-sm sm:text-2xl font-extrabold text-amber-400">₹{price}</span>
+                          <span className="text-white/40 text-[9px] sm:text-[10px]">{variantText}</span>
+                        </div>
+                        <div className="hidden sm:block">
+                          <AddToCartButton
+                            name={box.name}
+                            price={price}
+                            variant={variantText}
+                            image={box.image}
+                            className="bg-amber-500 hover:bg-amber-600 text-charcoal text-xs px-3 py-1.5"
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-center justify-between px-5 pb-5 pt-4 border-t border-white/10 mt-auto">
-                    <div className="flex flex-col">
-                      <span className="text-2xl font-extrabold text-amber-400">₹{price}</span>
-                      <span className="text-white/40 text-[10px]">{variantText}</span>
-                    </div>
-                    <AddToCartButton
-                      name={box.name}
-                      price={price}
-                      variant={variantText}
-                      image={box.image}
-                      className="bg-amber-500 hover:bg-amber-600 text-charcoal text-xs px-3 py-1.5"
-                    />
                   </div>
                 </motion.div>
               );

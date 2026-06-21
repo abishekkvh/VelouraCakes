@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Phone, MessageCircle, ShoppingBag } from 'lucide-react';
+import { Menu, X, Phone, MessageCircle, ShoppingBag, MapPin, Search, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import { useCart } from '../context/CartContext';
 
@@ -42,16 +42,31 @@ export default function Navigation() {
         }`}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center gap-2 lg:gap-4">
             {/* Logo */}
-            <Link href="#" className="flex items-center gap-2">
+            <Link href="#" className="flex items-center gap-1 sm:gap-2 shrink-0">
               <img src="/images/Velora Logo.png" alt="Veloura Logo" className="w-10 h-10 rounded-full object-cover bg-white/10" />
-              <span className={`font-playfair text-2xl font-bold ${
+              <span className={`hidden sm:inline font-playfair text-xl sm:text-2xl font-bold ${
                 scrolled ? 'text-royal' : 'text-royal-900'
               }`}>
                 Veloura
               </span>
             </Link>
+
+            {/* Unified Search Bar */}
+            <div className="flex flex-1 max-w-xl mx-1 sm:mx-4 items-center bg-white/90 backdrop-blur-sm border border-gray-200 rounded-full shadow-sm hover:shadow-md transition-shadow h-10 md:h-12 overflow-hidden">
+              <div className="flex items-center px-3 md:px-4 bg-transparent flex-1">
+                <Search className="w-4 h-4 md:w-5 md:h-5 text-gray-400 mr-2 shrink-0" />
+                <input 
+                  type="text" 
+                  placeholder="Search cakes..." 
+                  className="w-full outline-none text-xs md:text-sm text-gray-700 bg-transparent placeholder-gray-400" 
+                />
+              </div>
+              <button className="hidden sm:block bg-royal text-white px-4 md:px-6 h-full font-medium text-xs md:text-sm hover:bg-royal-600 transition-colors">
+                Search
+              </button>
+            </div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">

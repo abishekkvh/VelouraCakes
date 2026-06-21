@@ -43,7 +43,7 @@ export default function TresLechesCakes() {
         </motion.div>
 
         {/* Cakes Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex overflow-x-auto sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {cakes.map((cake, index) => (
             <motion.div
               key={cake.name}
@@ -51,38 +51,50 @@ export default function TresLechesCakes() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="premium-card group flex flex-col justify-between"
+              className="premium-card group flex flex-col justify-between w-[140px] sm:w-auto shrink-0 snap-start overflow-hidden"
             >
-              <div>
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={cake.image}
-                    alt={cake.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-royal shadow-sm">
-                    Eggless Available
+              <div className="flex flex-col h-full">
+                <div className="relative h-32 sm:h-56">
+                  <div className="w-full h-full overflow-hidden">
+                    <img
+                      src={cake.image}
+                      alt={cake.name}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white/90 backdrop-blur-sm px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[9px] sm:text-xs font-semibold text-royal shadow-sm">
+                    Eggless
+                  </div>
+                  {/* Floating Add To Cart Button - Mobile Only */}
+                  <div className="absolute -bottom-3 right-1 sm:hidden z-10">
+                    <AddToCartButton 
+                      name={cake.name} 
+                      price={cake.price} 
+                      image={cake.image}
+                      variant="Slice"
+                      compact={true}
+                    />
                   </div>
                 </div>
-                <div className="p-6">
-                  <h4 className="font-playfair text-xl font-bold text-charcoal mb-2 group-hover:text-royal transition-colors">
+                <div className="p-3 sm:p-6 flex flex-col grow">
+                  <h4 className="font-playfair text-sm sm:text-xl font-bold text-charcoal sm:mb-2 group-hover:text-royal transition-colors line-clamp-2">
                     {cake.name}
                   </h4>
-                  <p className="text-charcoal/60 text-sm mb-4 leading-relaxed h-12 overflow-hidden">
+                  <p className="hidden sm:block text-charcoal/60 text-sm mb-4 leading-relaxed h-12 overflow-hidden">
                     {cake.description}
                   </p>
-                </div>
-              </div>
-              <div className="p-6 pt-0 border-t border-gray-100/50 mt-auto">
-                <div className="flex justify-between items-center pt-4">
-                  <span className="text-2xl font-bold text-royal">₹{cake.price}</span>
-                  <AddToCartButton 
-                    name={cake.name} 
-                    price={cake.price} 
-                    image={cake.image}
-                    variant="Slice"
-                  />
+                  <div className="mt-1 sm:mt-auto pt-1 sm:pt-4 sm:border-t sm:border-gray-100/50 flex justify-between items-center">
+                    <span className="text-sm sm:text-2xl font-bold text-royal">₹{cake.price}</span>
+                    <div className="hidden sm:block">
+                      <AddToCartButton 
+                        name={cake.name} 
+                        price={cake.price} 
+                        image={cake.image}
+                        variant="Slice"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>
