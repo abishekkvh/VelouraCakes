@@ -8,7 +8,7 @@ export default function Hero() {
   const link = "https://wa.me/916383289827?text=Hi,%20I'd%20like%20to%20place%20an%20order";
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 md:pt-0">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-[#EAE0F5] via-white to-[#F5E6F0]" />
@@ -43,9 +43,9 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
           className="mb-6"
         >
-          <span className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md border border-royal/10 text-royal-900 text-sm font-medium px-6 py-2 rounded-full shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-royal animate-pulse" />
-            Eggless Available • Premium Quality • Freshly Baked
+          <span className="inline-flex items-center justify-center gap-2 bg-white/80 backdrop-blur-md border border-royal/10 text-royal-900 text-xs sm:text-sm font-medium px-4 sm:px-6 py-2 rounded-3xl sm:rounded-full shadow-sm max-w-[90%] mx-auto leading-snug">
+            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-royal animate-pulse shrink-0" />
+            <span>Eggless Available • Premium Quality • Freshly Baked</span>
           </span>
         </motion.div>
 
